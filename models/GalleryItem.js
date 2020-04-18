@@ -12,7 +12,7 @@ const GalleryItemSchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        req: 'user'
+        ref: 'user'
     }
 });
 
