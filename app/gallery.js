@@ -3,6 +3,7 @@ const multer = require('multer');
 const {nanoid} = require('nanoid');
 const path = require('path');
 const GalleryItem = require('../models/GalleryItem');
+const User = require('../models/User');
 
 const config = require('../config');
 const tokenCheck = require('../middlewerase/tokenCheck');
@@ -29,6 +30,12 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
    const data = await GalleryItem.find({author: req.params.id}).populate('author');
 
+   if(!data[0]) {
+       const author = await User.findOne({_id: req.params.id});
+
+       return res.send({data: [], author: author});
+   }
+
    res.send({data, author: data[0].author});
 });
 
@@ -49,6 +56,20 @@ router.post('/', [tokenCheck, upload.single('image')], async (req, res) => {
     const photo = await GalleryItem.create(newPhoto);
 
     res.send(photo);
+});
+
+router.delete('/:id', [tokenCheck], async (req, res) => {
+   try {
+       const photo = await GalleryItem.findOne({_id: req.params.id});
+
+       if(req.user._id.toString() !== photo.author.toString()) return  res.send({error: 'Its not your photo!'});
+
+       await photo.delete();
+
+       res.send({message: 'deleted!'});
+   } catch (e) {
+       res.status(404).send(e)
+   }
 });
 
 module.exports = router;
