@@ -33,7 +33,9 @@ const init = async () => {
         title: 'Trip',
         author: steve,
         image: 'http://localhost:8000/uploads/TexywgXCn_yCKqYzjhvcf.jpg'
-    })
+    });
+
+    mongoose.connection.close();
 
 };
 
