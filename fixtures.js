@@ -12,27 +12,27 @@ const init = async () => {
         displayName: 'Валера',
         password: '12345',
         token: '12345',
-        avatar: '0eNl99hOmzMb5Ts71WnZu.jpg',
+        avatar: 'http://localhost:8000/uploads/0eNl99hOmzMb5Ts71WnZu.jpg',
     }, {
         username: 'steve',
         displayName: 'Steve',
         password: '12345',
         token: '12345',
-        avatar: 'zRJLDKXliRpvOiis3fO2d.jpg',
+        avatar: 'http://localhost:8000/uploads/zRJLDKXliRpvOiis3fO2d.jpg',
     });
 
     await GalleryItem.create({
         title: 'Field',
         author: valera,
-        image: '0mLODLcg2kKHGDBc0qQAD.jpg'
+        image: 'http://localhost:8000/uploads/0mLODLcg2kKHGDBc0qQAD.jpg'
     }, {
         title: 'Яга',
         author: valera,
-        image: 'l4V5yFhiQALVekoVjNH7O.jpg'
+        image: 'http://localhost:8000/uploads/l4V5yFhiQALVekoVjNH7O.jpg'
     }, {
         title: 'Trip',
         author: steve,
-        image: 'TexywgXCn_yCKqYzjhvcf.jpg'
+        image: 'http://localhost:8000/uploads/TexywgXCn_yCKqYzjhvcf.jpg'
     })
 
 };
